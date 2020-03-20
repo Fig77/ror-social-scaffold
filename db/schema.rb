@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_02_04_165841) do
+ActiveRecord::Schema.define(version: 2020_03_20_210815) do
 
   create_table "comments", force: :cascade do |t|
     t.integer "user_id"
@@ -20,6 +20,16 @@ ActiveRecord::Schema.define(version: 2020_02_04_165841) do
     t.datetime "updated_at", null: false
     t.index ["post_id"], name: "index_comments_on_post_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
+  create_table "friend_requests", force: :cascade do |t|
+    t.integer "creator_id"
+    t.integer "friend_id"
+    t.integer "status"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["creator_id"], name: "index_friend_requests_on_creator_id"
+    t.index ["friend_id"], name: "index_friend_requests_on_friend_id"
   end
 
   create_table "likes", force: :cascade do |t|
@@ -51,4 +61,6 @@ ActiveRecord::Schema.define(version: 2020_02_04_165841) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "friend_requests", "users", column: "creator_id"
+  add_foreign_key "friend_requests", "users", column: "friend_id"
 end
