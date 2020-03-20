@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  get 'friend_requests/create'
+  get 'friend_requests/destroy'
+  get 'friend_requests/update'
   root 'posts#index'
 
   devise_for :users
