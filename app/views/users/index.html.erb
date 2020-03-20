@@ -5,6 +5,9 @@
         Name: <%= user.name %>
         <span class="profile-link">
           <%= link_to 'See Profile',  user_path(user), class: 'profile-link' %>
+          <%= link_to 'User Request' do %>
+            <i class="fab fa-accessible-icon"></i>
+          <% end %>
         </span>
       </li>
     <% end %>
