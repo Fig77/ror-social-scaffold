@@ -1,5 +1,5 @@
 class FriendRequest < ApplicationRecord
-  belongs_to :creator_id, class_name: 'User'
+  belongs_to :creator, class_name: 'User'
 
   scope :pending, -> { where('status = ?', nil) } # nil = pending
   scope :rejected, -> { where('status = ?', 0) } # 0 = rejected
