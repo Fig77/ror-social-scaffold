@@ -1,0 +1,60 @@
+// Place all the styles related to the FriendRequests controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+
+$space-1: 10px;
+$neutral: rgba(130,130,130,1);
+$decline: rgba(239,104,104,1);
+$accepted: rgba(104,239,132,1);
+$pending: rgba(198,208,0,1);
+
+.users-list {
+  &>li{
+    &>a{
+      font-weight:bold;
+      display: flex;
+      width:fit-content;
+      &>span{
+        padding-left:$space-1;
+        align-self:center;
+        font-size:x-small; 
+      }
+    }
+  }
+}
+
+.decline_friend{
+  color: $decline;
+  svg{
+    &>path{
+      fill:$decline;
+    }
+  }
+}
+
+.pending_friend{
+  color: $pending;
+  svg{
+    &>path{
+      fill:$pending;
+    }
+  }
+}
+
+.neutral_friend{
+  color: $neutral;
+  svg{
+    &>path{
+      fill:$neutral;
+    }
+  }
+}
+
+.invite_friend{
+  color: $accepted;
+  svg{
+    &>path{
+      fill:$accepted;
+    }
+  }
+}
