@@ -1,6 +1,6 @@
 class FriendRequestsController < ApplicationController
   def create
-    @friend = current_user.FriendRequests.create(friend_params)
+    @friend = current_user.friend_requests.create(:friend_id => params[:friend])
     redirect_to request.referrer
   end
 
@@ -14,6 +14,6 @@ class FriendRequestsController < ApplicationController
   end
 
   def friend_params
-    params.require(:friend).permit(:status)
+    params.require(:friend_request).permit(:friend)
   end
 end

@@ -1,4 +1,4 @@
-<%= link_to 'Invite', class: check_status(id) + '_friend' do %>
+<%= link_to friend_requests_path(:friend => id.to_i), method: :post, class: check_status(id) + '_friend' do %>
   <i class="fas fa-user-friends"></i>
   <span>Invite</span>
 <%end%>
