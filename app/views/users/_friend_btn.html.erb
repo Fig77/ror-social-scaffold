@@ -1,5 +1,20 @@
-<%if%>
-<%= link_to send('friend_requests_path', :friend => id), method: 'post', class: check_status(id) + '_friend' do %>
-  <i class="fas fa-user-friends"></i>
-  <span><%= check_status(id) %></span>
-<%end%>
+<div>
+  <%= button_to send('friend_requests_path', :friend => id), method: 'post', class: check_status(id) + '_friend', disabled: check_status(id) == 'pending', :data => { :disable_with => "Godzilla" } do %>
+    <i class="fas fa-user-friends"></i>
+    <span>
+      <% unless check_status(id)=='neutral' %>
+        <%= check_status(id) %>
+      <% else %>
+        Send Friend Request
+      <% end %>
+    </span>
+  <%end%>
+  <% unless friend_request_sent?(id).nil?%>
+    <% if friend_request_sent?(id).zero?%> <!-- User Has Created The Friend Request -->
+      <%= button_to send('friend_request_path', :id => id), method: 'delete', class:'dicline', disabled: check_status(id) == 'pending', :data => { :disable_with => "Godzilla" }, :title => "Cancel" do %>
+        <i class="fas fa-ban"></i>
+      <%end%>
+    <%elsif friend_request_sent?(id).positive? %><!-- Friend Request Created By Friend -->
+    <%end%>
+  <%end%>
+</div>

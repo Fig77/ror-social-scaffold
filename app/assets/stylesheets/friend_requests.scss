@@ -10,14 +10,23 @@ $pending: rgba(198,208,0,1);
 
 .users-list {
   &>li{
-    &>a{
-      font-weight:bold;
+    &>div{
       display: flex;
-      width:fit-content;
-      &>span{
-        padding-left:$space-1;
-        align-self:center;
-        font-size:x-small; 
+      &>form{
+        width: fit-content;
+        &>button{
+          border: none;
+          font-size: x-small;
+          background: transparent;
+          font-weight: bold;
+          display: flex;
+          width: fit-content;
+          &>span{
+            padding-left: $space-1;
+            align-self: center;
+            font-size: x-small; 
+          }
+        }
       }
     }
   }
@@ -27,7 +36,7 @@ $pending: rgba(198,208,0,1);
   color: $decline;
   svg{
     &>path{
-      fill:$decline;
+      fill: $decline;
     }
   }
 }
@@ -36,16 +45,17 @@ $pending: rgba(198,208,0,1);
   color: $pending;
   svg{
     &>path{
-      fill:$pending;
+      fill: $pending;
     }
   }
 }
 
 .neutral_friend{
+  cursor: pointer;
   color: $neutral;
   svg{
     &>path{
-      fill:$neutral;
+      fill: $neutral;
     }
   }
 }
@@ -54,7 +64,18 @@ $pending: rgba(198,208,0,1);
   color: $accepted;
   svg{
     &>path{
-      fill:$accepted;
+      fill: $accepted;
     }
   }
 }
+
+.dicline{
+  cursor: pointer;
+  margin-left: $space-1;
+  svg{
+    path{
+      fill: red;
+    }
+  }
+}
+
