@@ -6,7 +6,7 @@ class FriendRequestsController < ApplicationController
 
   def destroy
     current_user.friend_requests.find_by(friend_id: params[:id]).delete
-    redirect_to request.referrer
+    redirect_to request.referrer unless request.referrer.nil?
   end
 
   def update
@@ -14,7 +14,7 @@ class FriendRequestsController < ApplicationController
     temp = temp.friend_requests.find_by(friend_id: current_user.id)
     temp.status = params[:whatever]
     temp.save
-    redirect_to request.referrer
+    redirect_to request.referrer unless request.referrer.nil?
   end
 
   def friend_params
