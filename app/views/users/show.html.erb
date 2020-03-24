@@ -6,4 +6,5 @@
       <%= render @posts %>
     </ul>
   </article>
+  <%= render 'friend_btn', id: @user.id unless current_user.id == @user.id %>
 </section>

@@ -8,31 +8,27 @@ $decline: rgba(239,104,104,1);
 $accepted: rgba(104,239,132,1);
 $pending: rgba(198,208,0,1);
 
-.users-list {
-  &>li{
-    &>div{
+.friend_request_btns{
+  display: flex;
+  &>form{
+    width: fit-content;
+    &>button{
+      border: none;
+      font-size: x-small;
+      background: transparent;
+      font-weight: bold;
       display: flex;
-      &>form{
-        width: fit-content;
-        &>button{
-          border: none;
-          font-size: x-small;
-          background: transparent;
-          font-weight: bold;
-          display: flex;
-          width: fit-content;
-          &>span{
-            padding-left: $space-1;
-            align-self: center;
-            font-size: x-small; 
-          }
-        }
+      width: fit-content;
+      &>span{
+        padding-left: $space-1;
+        align-self: center;
+        font-size: x-small; 
       }
     }
   }
 }
 
-.decline_friend{
+.declined_friend{
   color: $decline;
   svg{
     &>path{
@@ -60,7 +56,7 @@ $pending: rgba(198,208,0,1);
   }
 }
 
-.invite_friend{
+.accepted_friend{
   color: $accepted;
   svg{
     &>path{
@@ -74,8 +70,17 @@ $pending: rgba(198,208,0,1);
   margin-left: $space-1;
   svg{
     path{
-      fill: red;
+      fill: $decline;
     }
   }
 }
 
+.accepted{
+  cursor: pointer;
+  margin-left: $space-1;
+  svg{
+    path{
+      fill: $accepted;
+    }
+  }
+}

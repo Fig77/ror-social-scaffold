@@ -9,9 +9,9 @@ module FriendRequestsHelper
   def friend_request_sent?(friend_id)
     result = nil
     if user_send_it?(friend_id)
-      result = 0            # User Created Friend Request
+      result = 0 # User Created Friend Request
     elsif friend_send_it?(friend_id)
-      result = 1            # Friend Created Friend Request
+      result = 1 # Friend Created Friend Request
     end
     result
   end
@@ -24,10 +24,10 @@ module FriendRequestsHelper
       'neutral'
     else
       case stat.status
-        when nil then 'pending'
-        when 0 then 'accepted'
-        else 'declined'
-        end
+      when nil then 'pending'
+      when 0 then 'accepted'
+      else 'declined'
+      end
     end
   end
 
