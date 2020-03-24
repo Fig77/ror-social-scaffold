@@ -23,7 +23,7 @@ module FriendRequestsHelper
     if stat.nil?
       'neutral'
     else
-      case temp_status.status
+      case stat.status
         when nil then 'pending'
         when 0 then 'accepted'
         else 'declined'
