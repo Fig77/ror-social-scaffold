@@ -1,7 +1,7 @@
 class FriendRequestsController < ApplicationController
   def create
-    redirect_to request.referrer
     @friend = current_user.friend_requests.create(friend_id: params[:friend])
+    redirect_to request.referrer unless request.referrer.nil?
   end
 
   def destroy
