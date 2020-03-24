@@ -1,0 +1,9 @@
+post_001:
+  id: 1
+  user: user_001
+  content: wololo
+
+post_002:
+  id: 2
+  user_id: user_001
+  content: wololoo

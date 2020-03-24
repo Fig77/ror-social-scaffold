@@ -11,7 +11,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
     post user_session_url
   end
 
-  test 'Will get all users from index' do
+  test 'Will get all users when getting to indes' do
     get users_path
     assert_response :success
   end
