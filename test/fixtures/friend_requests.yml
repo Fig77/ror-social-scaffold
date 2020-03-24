@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 request_001:
   id: 1
   creator_id: 1
@@ -8,6 +7,4 @@ request_001:
   id: 2
   creator_id: 1
   friend_id: 4
-=======
-# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
->>>>>>> e65511c70f18d3721e84afcf42ba78714435d831
+
