@@ -12,13 +12,16 @@ class FriendRequestsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'Create Friend Request' do
-    post friend_requests_path, params: { friend: 1  }
+    user = users(:user_002)
+    post friend_requests_path, params: { friend: user.id }
     assert_response :success
   end
-  #  test 'should get destroy' do
-  #    get friend_requests_destroy_url
-  #    assert_response :success
-  #  end
+
+  test 'Delete Friend Request' do
+    request = friend_requests(:request_001)
+    delete friend_request_path(request.friend_id)
+    assert_response :success
+  end
   #
   #  test 'should get update' do
   #    get friend_requests_update_url
