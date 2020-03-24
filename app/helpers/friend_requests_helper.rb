@@ -1,16 +1,9 @@
 module FriendRequestsHelper
   def check_status(friend)
-    temp_status = current_user.friend_requests.find_by(friend_id: friend)
-    temp = if temp_status.nil?
-             'neutral'
-           else
-             case temp_status.status
-             when nil then 'pending'
-             when 0 then 'accepted'
-             else 'declined'
-             end
-           end
-    temp
+    temp_user = User.find(friend)
+    stat = status(current_user, friend)
+    stat = status(temp_user, current_user.id) if stat == 'neutral'
+    stat
   end
 
   def friend_request_sent?(friend_id)
@@ -24,6 +17,19 @@ module FriendRequestsHelper
   end
 
   private
+
+  def status(user, friend)
+    stat = user.friend_requests.find_by(friend_id: friend)
+    if stat.nil?
+      'neutral'
+    else
+      case temp_status.status
+        when nil then 'pending'
+        when 0 then 'accepted'
+        else 'declined'
+        end
+    end
+  end
 
   def user_send_it?(friend_id)
     bool = true
