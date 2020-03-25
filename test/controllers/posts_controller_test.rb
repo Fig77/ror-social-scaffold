@@ -1,9 +1,7 @@
 require 'test_helper'
 
 class PostsControllerTest < ActionDispatch::IntegrationTest
-  def current_user
-    @current_user
-  end
+  attr_reader :current_user
 
   setup do
     get '/users/sign_in'

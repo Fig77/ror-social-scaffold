@@ -15,7 +15,7 @@ class FriendRequestsController < ApplicationController
     temp.save
     redirect_to request.referrer unless request.referrer.nil?
   end
-  
+
   private
 
   def friend_params

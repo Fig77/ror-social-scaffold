@@ -1,9 +1,7 @@
 require 'test_helper'
 
 class FriendRequestsControllerTest < ActionDispatch::IntegrationTest
-  def current_user
-    @current_user
-  end
+  attr_reader :current_user
 
   setup do
     get '/users/sign_in'
@@ -22,7 +20,7 @@ class FriendRequestsControllerTest < ActionDispatch::IntegrationTest
     delete friend_request_path(request.friend_id)
     assert_response :success
   end
-  
+
   test 'Update Friend Request' do
     request = friend_requests(:request_003)
     patch friend_request_path(request.creator_id, params: { whatever: 1 })

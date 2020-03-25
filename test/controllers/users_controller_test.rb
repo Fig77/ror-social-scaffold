@@ -1,9 +1,7 @@
 require 'test_helper'
 
 class UsersControllerTest < ActionDispatch::IntegrationTest
-  def current_user
-    @current_user
-  end
+  attr_reader :current_user
 
   setup do
     get '/users/sign_in'
@@ -18,7 +16,7 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'Will show a specific  user' do
-  	get user_path(users(:user_002).id)
+    get user_path(users(:user_002).id)
     assert_response :success
   end
 end

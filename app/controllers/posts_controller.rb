@@ -20,10 +20,12 @@ class PostsController < ApplicationController
   private
 
   def timeline_posts
-    find_friend_by_me = current_user.friend_requests.all.where(:status => 0).select(:friend_id)
-    find_friend_by_friends = current_user.inverse_friendships.all.where(:status => 0).select(:creator_id)
-
-    @timeline_posts ||= Post.all.ordered_by_most_recent.includes(:user).where(:user => find_friend_by_me).or(Post.all.ordered_by_most_recent.includes(:user).where(:user => find_friend_by_friends)).or(Post.all.ordered_by_most_recent.includes(:user).where(:user => current_user))
+    find_friend_by_me = current_user.friend_requests.all.where(status: 0).select(:friend_id)
+    find_friend_by_friends = current_user.inverse_friendships.all.where(status: 0).select(:creator_id)
+    temp1 = Post.all.ordered_by_most_recent.includes(:user).where(user: find_friend_by_me)
+    temp2 = Post.all.ordered_by_most_recent.includes(:user).where(user: current_user)
+    temp3 = Post.all.ordered_by_most_recent.includes(:user).where(user: find_friend_by_friends)
+    @timeline_posts ||= temp1.or(temp2).or(temp3)
   end
 
   def post_params
