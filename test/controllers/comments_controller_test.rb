@@ -12,7 +12,10 @@ class CommentsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test 'Will create a new comment' do
-    put posts_path, params: { comment: { comment_content: 'u bad' } }
+    post = posts(:post_001)
+    post posts_path, 
+                   params: { post: { post_id: post.id }, 
+                   comment: { comment_content: 'u bad' } }
     assert_response :success, 'post could not be reached'
     assert_select 'div.post-comments', count: 1
   end
