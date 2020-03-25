@@ -10,8 +10,7 @@ class FriendRequestsController < ApplicationController
   end
 
   def update
-    temp = User.find(params[:id])
-    temp = temp.friend_requests.find_by(friend_id: current_user.id)
+    temp = current_user.inverse_friendships.find_by(creator_id: params[:id])
     temp.status = params[:whatever]
     temp.save
     redirect_to request.referrer unless request.referrer.nil?
