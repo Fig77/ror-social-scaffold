@@ -1,0 +1,30 @@
+<div class="friend_request_btns">
+  <%= button_to send('friend_requests_path', :friend => id), method: 'post', class: check_status(id) + '_friend', disabled: check_status(id) != 'neutral', :data => { :disable_with => "Godzilla" } do %>
+    <i class="fas fa-user-friends"></i>
+    <span>
+      <% unless check_status(id)=='neutral' %>
+        <%= check_status(id) %>
+      <% else %>
+        Send Friend Request
+      <% end %>
+    </span>
+  <%end%>
+  <% unless friend_request_sent?(id).nil?%>
+    <% if friend_request_sent?(id).zero? && check_status(id) != 'declined' %> <!-- User Has Created The Friend Request -->
+      <%= button_to send('friend_request_path', :id => id), method: 'delete', class:'dicline', :data => { :disable_with => "Godzilla" }, :title => "Cancel" do %>
+        <i class="fas fa-ban"></i>
+      <%end%>
+    <%elsif friend_request_sent?(id).positive? %><!-- Friend Request Created By Friend -->
+      <%unless check_status(id) == 'declined'%>
+        <%= button_to send('friend_request_path', :id => id, :whatever => 1), method: 'patch', class:'dicline', :data => { :disable_with => "" }, :title => "Reject" do %>
+          <i class="fas fa-ban"></i>
+        <%end%>
+      <%end%>
+      <%unless check_status(id) == 'accepted'%>
+        <%= button_to send('friend_request_path', :id => id, :whatever => 0), method: 'patch', class:'accepted', :data => { :disable_with => "" }, :title => "Accept" do %>
+          <i class="fas fa-check"></i>
+        <%end%>
+      <%end%>
+    <%end%>
+  <%end%>
+</div>

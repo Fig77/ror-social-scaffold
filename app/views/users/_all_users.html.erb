@@ -1,0 +1,16 @@
+
+<section class="users-section">
+  <ul class="users-list">
+    <% @users.each do |user| %>
+     <% unless current_user.id == user.id %>
+      <li>
+        Name: <%= user.name %>
+        <span class="profile-link">
+          <%= link_to 'See Profile',  user_path(user), class: 'profile-link' %>
+        </span>
+        <%= render 'friend_btn', id: user.id%>
+      </li>
+      <% end  %>
+    <% end %>
+  </ul>
+</section>
