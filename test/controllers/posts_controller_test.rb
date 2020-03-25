@@ -9,43 +9,16 @@ class PostsControllerTest < ActionDispatch::IntegrationTest
     get '/users/sign_in'
     sign_in users(:user_001)
     post user_session_url
-    #posts(:post_001).user = users(:user_001)
-    #posts(:post_001).user = users(:user_001)
-
   end
 
-  test 'Will return all posts' do
-    puts posts(:post_001).user.id
+  test 'Will show all created posts in post route' do
+    get posts_path
+    assert_response :success, 'Path could not be reached'
+    assert_select 'li', count: 2
   end
 
   test 'Will create a new post' do
-
+    post posts_path, params: { post: { post_content: 'no u' } }
+    assert_response :success, 'Post could not be created'
   end
 end
-
-  # ###
-  # def index
-  #   @post = Post.new
-  #   timeline_posts
-  # end
-
-  # def create
-  #   @post = current_user.posts.new(post_params)
-
-  #   if @post.save
-  #     redirect_to posts_path, notice: 'Post was successfully created.'
-  #   else
-  #     timeline_posts
-  #     render :index, alert: 'Post was not created.'
-  #   end
-  # end
-
-  # private
-
-  # def timeline_posts
-  #   @timeline_posts ||= Post.all.ordered_by_most_recent.includes(:user)
-  # end
-
-  # def post_params
-  #   params.require(:post).permit(:content)
-  # end

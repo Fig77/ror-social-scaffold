@@ -13,7 +13,8 @@ class UsersControllerTest < ActionDispatch::IntegrationTest
 
   test 'Will get all users when getting to indes' do
     get users_path
-    assert_response :success
+    assert_response :success, 'users could not be reached'
+    assert_select 'li', count: 3
   end
 
   test 'Will show a specific  user' do
