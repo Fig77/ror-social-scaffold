@@ -12,7 +12,7 @@ class FriendRequestsController < ApplicationController
   def update
     temp = current_user.inverse_friendships.find_by(creator_id: params[:id])
     temp.status = params[:whatever]
-    puts self.confirmed.inspect
+    puts confirmed.inspect
     temp.save
     redirect_to request.referrer unless request.referrer.nil?
   end
@@ -20,10 +20,10 @@ class FriendRequestsController < ApplicationController
   private
 
   def confirm_friend
-    self.update_attributes(confirmed: true)
-    Friendship.create!(friend_id: self.user_id,
-                    user_id: self.friend_id,
-                    confirmed: true)
+    update_attributes(confirmed: true)
+    Friendship.create!(friend_id: user_id,
+                       user_id: friend_id,
+                       confirmed: true)
   end
 
   def friend_params

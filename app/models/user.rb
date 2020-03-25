@@ -20,7 +20,7 @@ class User < ApplicationRecord
   ## Friend Request Pending
   has_many :pending_friendships, -> { where confirmed: false }, class_name: 'FriendRequest', foreign_key: 'user_id'
   has_many :pending_friends, through: :pending_friendships, source: :friend
-  ## 
+  ##
   ## Friend Request Inverted
   has_many :inverted_friendships, -> { where confirmed: false }, class_name: 'FriendRequest', foreign_key: 'friend_id'
   has_many :friend_requests, through: :inverted_friendships
