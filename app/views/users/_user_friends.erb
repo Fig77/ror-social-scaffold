@@ -1,6 +1,7 @@
+<% if current_user.id == @user.id %>
 <section class="users-section">
   <ul class="users-list">
-    <% @users.each do |user| %>
+    <% @friend.each do |user| %>
      <% unless current_user.id == user.id %>
       <li>
         Name: <%= user.name %>
@@ -13,3 +14,4 @@
     <% end %>
   </ul>
 </section>
+<% end %>

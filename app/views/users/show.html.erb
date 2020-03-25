@@ -7,5 +7,5 @@
     </ul>
   </article>
   <%= render 'friend_btn', id: @user.id unless current_user.id == @user.id %>
-  <%= render 'user_friends', @user %>
+  <%= render 'user_friends', :object => @user %>
 </section>
