@@ -1,48 +1,49 @@
 module FriendRequestsHelper
   def check_status(friend)
-    temp_user = User.find(friend)
-    stat = status(current_user, friend)
-    stat = status(temp_user, current_user.id) if stat == 'neutral'
-    stat
+    results = 'neutral'
+    if current_user.inverted_friendships.find_by(:user_id => friend).nil?
+      return friend_srch(friend) unless friend_srch(friend).nil?
+    else
+      if current_user.pending_friendships.find_by(:friend_id => friend).nil?
+        results = 'pending'
+      else
+        results = 'declined'
+      end
+    end
+    results
   end
 
-  def friend_request_sent?(friend_id)
-    result = nil
-    if user_send_it?(friend_id)
-      result = 0 # User Created Friend Request
-    elsif friend_send_it?(friend_id)
-      result = 1 # Friend Created Friend Request
+  def creator?(friend)
+    results = false
+    results = true if current_user.inverted_friendships.find_by(:user_id => friend).nil?
+    results
+  end
+
+  def accepted?(friend)
+    results = true 
+    results = false if current_user.confirmed_friendships.find_by(:friend_id => friend).nil?
+    results
+  end
+
+  def declined?(friend)
+    results = true
+    temp = current_user.pending_friendships.find_by(:friend_id => friend)
+    temp1 = current_user.inverted_friendships.find_by(:user_id => friend)
+    if temp.nil? || temp1.nil?
+      results = false
     end
-    result
+    results
   end
 
   private
 
-  def status(user, friend)
-    stat = user.friend_requests.find_by(friend_id: friend)
-    if stat.nil?
-      'neutral'
+  def friend_srch(friend)
+    results = nil
+    unless current_user.pending_friendships.find_by(:friend_id => friend).nil?
+      results = 'pending'
     else
-      case stat.status
-      when nil then 'pending'
-      when 0 then 'accepted'
-      else 'declined'
-      end
-    end
-  end
-
-  def user_send_it?(friend_id)
-    bool = true
-    temp_request = current_user.friend_requests.find_by(friend_id: friend_id)
-    bool = false if temp_request.nil?
-    bool
-  end
-
-  def friend_send_it?(friend_id)
-    bool = true
-    temp_user = User.find(friend_id)
-    temp_request = temp_user.friend_requests.find_by(friend_id: current_user.id)
-    bool = false if temp_request.nil?
-    bool
+      results = 'accepted' unless current_user.confirmed_friendships.find_by(:friend_id => friend).nil?
+    end 
+    results
   end
 end

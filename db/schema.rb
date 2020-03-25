@@ -23,13 +23,13 @@ ActiveRecord::Schema.define(version: 2020_03_20_210815) do
   end
 
   create_table "friend_requests", force: :cascade do |t|
-    t.integer "creator_id"
+    t.integer "user_id"
     t.integer "friend_id"
-    t.integer "status"
+    t.boolean "confirmed"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["creator_id"], name: "index_friend_requests_on_creator_id"
     t.index ["friend_id"], name: "index_friend_requests_on_friend_id"
+    t.index ["user_id"], name: "index_friend_requests_on_user_id"
   end
 
   create_table "likes", force: :cascade do |t|
@@ -61,6 +61,6 @@ ActiveRecord::Schema.define(version: 2020_03_20_210815) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "friend_requests", "users", column: "creator_id"
+  add_foreign_key "friend_requests", "users"
   add_foreign_key "friend_requests", "users", column: "friend_id"
 end
