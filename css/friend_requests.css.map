@@ -1,0 +1,9 @@
+{
+    "version": 3,
+    "mappings": "",
+    "sources": [
+        "../app/assets/stylesheets/friend_requests.scss"
+    ],
+    "names": [],
+    "file": "friend_requests.css"
+}

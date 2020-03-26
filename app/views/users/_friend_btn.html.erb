@@ -1,0 +1,22 @@
+<div class="friend_request_btns">
+  <%= button_to send('friend_requests_path', :friend => id), method: 'post', class: check_status(id) + '_friend', disabled: check_status(id) != 'neutral', :data => { :disable_with => "Godzilla" } do %>
+    <i class="fas fa-user-friends"></i>
+    <span>
+      <% unless check_status(id)=='neutral' %>
+        <%= check_status(id) %>
+      <% else %>
+        Send Friend Request
+      <% end %>
+    </span>
+  <%end%>
+
+  <% if !creator?(id) && check_status(id)=='pending' %>
+        <%= button_to send('friend_request_path', :id => id, :answer => false), method: 'patch', class:'dicline', :data => { :disable_with => "" }, :title => "Reject" do %>
+          <i class="fas fa-ban"></i>
+        <%end%>
+        <%= button_to send('friend_request_path', :id => id, :answer => true), method: 'patch', class:'accepted', :data => { :disable_with => "" }, :title => "Accept" do %>
+          <i class="fas fa-check"></i>
+        <%end%>
+  <%end%>
+
+</div>
