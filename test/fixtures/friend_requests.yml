@@ -1,15 +1,5 @@
 request_001:
   id: 1
-  creator_id: 1
-  friend_id: 3
-
-request_002:
-  id: 2
-  creator_id: 1
-  friend_id: 4
-
-request_003:
-  id: 3
-  creator_id: 2
+  user_id: 2
   friend_id: 1
-
+  confirmed: 0

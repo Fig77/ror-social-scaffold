@@ -15,15 +15,9 @@ class FriendRequestsControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 
-  test 'Delete Friend Request' do
-    request = friend_requests(:request_001)
-    delete friend_request_path(request.friend_id)
-    assert_response :success
-  end
-
   test 'Update Friend Request' do
-    request = friend_requests(:request_003)
-    patch friend_request_path(request.creator_id, params: { whatever: 1 })
+    request = friend_requests(:request_001)
+    patch friend_request_path(request.user_id, params: { answer: true })
     assert_response :success
   end
 end
