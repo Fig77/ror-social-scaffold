@@ -9,7 +9,7 @@ Rails.application.routes.draw do
     resources :comments, only: [:create]
     resources :likes, only: [:create, :destroy]
   end
-  resources :friend_requests, only: [:create, :update, :destroy]
+  resources :friend_requests, only: [:create, :update]
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end
