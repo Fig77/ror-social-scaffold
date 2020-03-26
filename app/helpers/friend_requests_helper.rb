@@ -1,48 +1,37 @@
 module FriendRequestsHelper
   def check_status(friend)
-    temp_user = User.find(friend)
-    stat = status(current_user, friend)
-    stat = status(temp_user, current_user.id) if stat == 'neutral'
-    stat
+    return 'declined' if declined?(friend)
+    return 'pending' if pending?(friend)
+    return 'accepted' if accepted?(friend)
+
+    'neutral'
   end
 
-  def friend_request_sent?(friend_id)
-    result = nil
-    if user_send_it?(friend_id)
-      result = 0 # User Created Friend Request
-    elsif friend_send_it?(friend_id)
-      result = 1 # Friend Created Friend Request
-    end
-    result
+  def creator?(friend)
+    results = false
+    results = true if current_user.inverted_friendships.find_by(user_id: friend).nil?
+    results
   end
 
-  private
-
-  def status(user, friend)
-    stat = user.friend_requests.find_by(friend_id: friend)
-    if stat.nil?
-      'neutral'
-    else
-      case stat.status
-      when nil then 'pending'
-      when 0 then 'accepted'
-      else 'declined'
-      end
-    end
+  def pending?(friend)
+    results = true
+    temp = current_user.pending_friendships.find_by(friend_id: friend)
+    temp1 = current_user.inverted_friendships.find_by(user_id: friend)
+    results = false if temp.nil? && temp1.nil?
+    results
   end
 
-  def user_send_it?(friend_id)
-    bool = true
-    temp_request = current_user.friend_requests.find_by(friend_id: friend_id)
-    bool = false if temp_request.nil?
-    bool
+  def accepted?(friend)
+    results = true
+    results = false if current_user.confirmed_friendships.find_by(friend_id: friend).nil?
+    results
   end
 
-  def friend_send_it?(friend_id)
-    bool = true
-    temp_user = User.find(friend_id)
-    temp_request = temp_user.friend_requests.find_by(friend_id: current_user.id)
-    bool = false if temp_request.nil?
-    bool
+  def declined?(friend)
+    results = true
+    temp = current_user.pending_friendships.find_by(friend_id: friend)
+    temp1 = current_user.inverted_friendships.find_by(user_id: friend)
+    results = false if temp.nil? || temp1.nil?
+    results
   end
 end

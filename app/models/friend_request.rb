@@ -1,8 +1,11 @@
 class FriendRequest < ApplicationRecord
-  belongs_to :creator, class_name: 'User'
-  belongs_to :friend, class_name: 'User'
+  def answer_request(boolean)
+    update_attributes(confirmed: boolean)
+    FriendRequest.create!(friend_id: user_id,
+                          user_id: friend_id,
+                          confirmed: boolean)
+  end
 
-  scope :pending, -> { where('status = ?', nil) } # nil = pending
-  scope :rejected, -> { where('status = ?', 0) } # 0 = rejected
-  scope :accepted, -> { where('status = ?', 1) } # 1 = accepted
+  belongs_to :user, class_name: 'User'
+  belongs_to :friend, class_name: 'User'
 end

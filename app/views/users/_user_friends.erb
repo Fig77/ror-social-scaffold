@@ -2,7 +2,7 @@
 <section class="users-section">
   <ul class="users-list">
     <% @friend.each do |user| %>
-     <% unless current_user.id == user.id %>
+     <% unless current_user.id == user.id || check_status(user.id) == 'neutral'%>
       <li>
         Name: <%= user.name %>
         <span class="profile-link">
