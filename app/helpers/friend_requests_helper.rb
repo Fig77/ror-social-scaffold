@@ -3,6 +3,7 @@ module FriendRequestsHelper
     return 'declined' if declined?(friend)
     return 'pending' if pending?(friend)
     return 'accepted' if accepted?(friend)
+
     'neutral'
   end
 
