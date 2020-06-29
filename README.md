@@ -41,7 +41,7 @@ sqlite3: >=1.4.2
 
 ### Setup
 
-Instal gems with:
+Install gems with:
 
 ```
 bundle install
@@ -94,7 +94,7 @@ Open `http://localhost:3000/` in your browser.
 
 ## 🤝 Contributing
 
-Contributions, issues and feature requests are welcome!
+Contributions, issues, and feature requests are welcome!
 
 Feel free to check the [issues page](issues/).
 
@@ -102,14 +102,14 @@ Feel free to check the [issues page](issues/).
 
 ## Show your support
 
-Give a ⭐️ if you like this project!
+Give and ⭐️ if you like this project!
 
 ---
 
 ## Acknowledgments
 
-- Hat tip to anyone whose code was used
-- Thanks to Microverse for it Support!
+- Hat tip to anyone who's code was used
+- Thanks to Microverse for its Support!
 - Special thanks to the learnenought.com
 
 ---
